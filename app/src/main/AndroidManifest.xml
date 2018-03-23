@@ -28,6 +28,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.niu.csci.z1697841.assignment3.MainActivity" />
         </activity>
+        <activity
+            android:name=".AddOwnerActivity"
+            android:label="@string/title_activity_add_owner"
+            android:parentActivityName=".OwnersActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.niu.csci.z1697841.assignment3.OwnersActivity" />
+        </activity>
     </application>
 
 </manifest>

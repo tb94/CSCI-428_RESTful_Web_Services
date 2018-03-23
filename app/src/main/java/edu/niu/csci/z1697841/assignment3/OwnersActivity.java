@@ -1,9 +1,9 @@
 package edu.niu.csci.z1697841.assignment3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -50,11 +50,15 @@ public class OwnersActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "This will add person to list of owners", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                addOwner();
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void addOwner() {
+        Intent intent = new Intent(this, AddOwnerActivity.class);
+        startActivity(intent);
     }
 
     private class OwnersAdapter extends RecyclerView.Adapter<OwnersAdapter.OwnerViewHolder> {
@@ -88,8 +92,7 @@ public class OwnersActivity extends AppCompatActivity {
             }
 
             public void bindView(Owner owner) {
-                StringBuilder name = new StringBuilder(owner.getFirstName()).append(" ").append(owner.getLastName());
-                nameTV.setText(name.toString());
+                nameTV.setText(owner.getFirstName() + " " + owner.getLastName());
                 idTV.setText(String.valueOf(owner.getOid()));
             }
         }
