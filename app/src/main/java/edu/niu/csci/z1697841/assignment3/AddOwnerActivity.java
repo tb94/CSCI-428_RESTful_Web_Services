@@ -48,18 +48,22 @@ public class AddOwnerActivity extends AppCompatActivity {
         RESTfulPOST post;
         String fname = fnameET.getText().toString();
         String lname = lnameET.getText().toString();
+        String regex = "^[a-zA-Z]*$";
 
-        post = new RESTfulPOST(fname, lname);
-
-/*        DOESNT WORK YET
-            if (!fname.matches("[^a-zA-Z]") && !fname.matches("[^a-zA-Z]")) {
-            Toast.makeText(this, "Name must be letters only", Toast.LENGTH_SHORT).show();
+        if (fname.isEmpty()) {
+            Toast.makeText(this, "First Name cannot be blank", Toast.LENGTH_SHORT).show();
+        } else if (lname.isEmpty()) {
+            Toast.makeText(this, "Last Name cannot be blank", Toast.LENGTH_SHORT).show();
+        } else if (!fname.matches(regex)) {
+            Toast.makeText(this, "First Name must be letters only", Toast.LENGTH_SHORT).show();
+        } else if (!lname.matches(regex)) {
+            Toast.makeText(this, "Last Name must be letters only", Toast.LENGTH_SHORT).show();
         } else {
             post = new RESTfulPOST(fname, lname);
+//            post.execute();
             Toast.makeText(this, fname + " " + lname + " has been registered", Toast.LENGTH_SHORT).show();
-        }*/
+        }
 
-//        post.execute();
         fnameET.setText("");
         fnameET.clearFocus();
         lnameET.setText("");
