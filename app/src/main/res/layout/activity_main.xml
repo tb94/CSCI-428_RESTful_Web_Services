@@ -1,42 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
+    android:orientation="vertical"
     tools:context="edu.niu.csci.z1697841.assignment3.MainActivity">
 
     <Button
+        android:id="@+id/sendPOSTButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="25dp"
+        android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:text="Send POST Request"
-        android:id="@+id/sendPOSTButton"
-        android:onClick="sendPOSTRequest" />
+        android:onClick="sendPOSTRequest"
+        android:padding="25dp"
+        android:text="This doesnt do anything yet" />
 
     <Button
+        android:id="@+id/owners_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="25dp"
+        android:layout_gravity="center"
         android:layout_margin="10dp"
-        android:text="Send GET Request"
-        android:id="@+id/sendGETButton"
-        android:onClick="sendGETRequest"/>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fillViewport="true">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAlignment="center"
-            android:hint="Response..."
-            android:id="@+id/responseTextView"/>
-    </ScrollView>
-
+        android:onClick="startOwners"
+        android:padding="25dp"
+        android:text="Owners" />
 
 </LinearLayout>

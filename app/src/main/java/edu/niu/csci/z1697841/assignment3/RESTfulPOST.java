@@ -1,33 +1,30 @@
 package edu.niu.csci.z1697841.assignment3;
 
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.BufferedReader;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URI;
 import java.net.URL;
 import java.net.URLEncoder;
 
 /**
  * Created by Tim on 3/20/2018.
+ *
+ * Takes the context of the calling thread, and two strings
+ *      for the owners first name and last name to be added.
+ * Builds the parameters required to make a POST request
+ * Sends the request to add JSON data to the webservice
+ * Returns the response code from the webservice
  */
 
 public class RESTfulPOST extends AsyncTask<Object, Object, String> {
-    private String urlParams = new String();
-    private final Context context;
+    private String urlParams;
 
-    public RESTfulPOST(Context context, String firstName, String lastName) {
-        this.context = context;
+    public RESTfulPOST(String firstName, String lastName) {
         StringBuilder paramsBuilder = new StringBuilder();
 
         try {
@@ -46,7 +43,6 @@ public class RESTfulPOST extends AsyncTask<Object, Object, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Toast.makeText(context, "POST is being sent", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -77,10 +73,10 @@ public class RESTfulPOST extends AsyncTask<Object, Object, String> {
 
             responseCode = connection.getResponseCode();
 
-            display = new StringBuilder("Request URL: " + url);
-            display.append("\nRequest Parameters: " + urlParams);
-            display.append("\nResponse Code: " + responseCode);
-            display.append("\nType: POST");
+            display = new StringBuilder("Request URL: " + url)
+                    .append("\nRequest Parameters: ").append(urlParams)
+                    .append("\nResponse Code: ").append(responseCode)
+                    .append("\nType: POST");
 
             Log.d("URL", String.valueOf(connection.getURL()));
             reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
@@ -91,10 +87,8 @@ public class RESTfulPOST extends AsyncTask<Object, Object, String> {
             }
             reader.close();
 
-            display.append("\nResponse:\n" + responseOutput);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            display.append("\nResponse:\n").append(responseOutput);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return responseOutput.toString();

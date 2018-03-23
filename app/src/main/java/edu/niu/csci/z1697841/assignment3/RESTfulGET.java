@@ -1,39 +1,36 @@
 package edu.niu.csci.z1697841.assignment3;
 
-import android.content.Context;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 
 /**
  * Created by Tim on 3/20/2018.
+ *
+ * Takes no parameters
+ * Makes a GET request to retrieve JSON data from the webservice
+ * Parses the JSON to create Owner object
+ * Returns the list of Owners
  */
 
 public class RESTfulGET extends AsyncTask<Object, Object, ArrayList<Owner>> {
     private ArrayList<Owner> list = new ArrayList<>();
-    private Context context;
 
-    public RESTfulGET(Context context) {
-        this.context = context;
+    public RESTfulGET() {
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Toast.makeText(context, "GET is being sent", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -44,7 +41,7 @@ public class RESTfulGET extends AsyncTask<Object, Object, ArrayList<Owner>> {
         BufferedReader reader;
         JSONArray jsonResult;
         String line;
-        String data = new String();
+        StringBuilder data = new StringBuilder(new String());
         try {
             url = new URL("http://www.jorjabrown.us/petstore/api/owners/list");
             connection = (HttpURLConnection) url.openConnection();
@@ -52,11 +49,11 @@ public class RESTfulGET extends AsyncTask<Object, Object, ArrayList<Owner>> {
             reader = new BufferedReader(new InputStreamReader(stream));
 
             while ((line = reader.readLine()) != null) {
-                data += line;
+                data.append(line);
             }
             reader.close();
 
-            jsonResult = new JSONArray(data);
+            jsonResult = new JSONArray(data.toString());
 
             for (int i = 0; i < jsonResult.length(); i++) {
                 JSONObject owner = jsonResult.getJSONObject(i);
@@ -64,13 +61,11 @@ public class RESTfulGET extends AsyncTask<Object, Object, ArrayList<Owner>> {
                 String fname = owner.getString("fname");
                 String lname = owner.getString("lname");
 
-                list.add(new Owner(oid, fname,lname));
+                if (!oid.isEmpty() && !fname.isEmpty() && !lname.isEmpty()) {
+                    list.add(new Owner(oid, fname, lname));
+                }
             }
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return list;
