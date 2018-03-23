@@ -12,27 +12,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+
+        <activity
+            android:name=".OwnersActivity"
+            android:label="@string/title_activity_owners"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".OwnersActivity"
-            android:label="@string/title_activity_owners"
-            android:parentActivityName=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="edu.niu.csci.z1697841.assignment3.MainActivity" />
-        </activity>
+
         <activity
             android:name=".AddOwnerActivity"
             android:label="@string/title_activity_add_owner"
             android:parentActivityName=".OwnersActivity"
             android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="edu.niu.csci.z1697841.assignment3.OwnersActivity" />
+        </activity>
+
+        <activity
+            android:name=".InfoActivity"
+            android:label="@string/action_info"
+            android:parentActivityName=".OwnersActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="edu.niu.csci.z1697841.assignment3.OwnersActivity" />
