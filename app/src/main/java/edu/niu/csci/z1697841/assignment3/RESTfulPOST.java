@@ -13,9 +13,9 @@ import java.net.URLEncoder;
 
 /**
  * Created by Tim on 3/20/2018.
- *
+ * <p>
  * Takes the context of the calling thread, and two strings
- *      for the owners first name and last name to be added.
+ * for the owners first name and last name to be added.
  * Builds the parameters required to make a POST request
  * Sends the request to add JSON data to the webservice
  * Returns the response code from the webservice
@@ -58,7 +58,7 @@ public class RESTfulPOST extends AsyncTask<Object, Object, String> {
 
         try {
             url = new URL("http://www.jorjabrown.us/petstore/api/owners/add");
-            connection = (HttpURLConnection)url.openConnection();
+            connection = (HttpURLConnection) url.openConnection();
             connection.setDoInput(true);
             connection.setDoOutput(true);
             connection.setUseCaches(false);

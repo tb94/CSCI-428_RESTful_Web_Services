@@ -3,7 +3,6 @@ package edu.niu.csci.z1697841.assignment3;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.DividerItemDecoration;
@@ -18,6 +17,14 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+/**
+ * @author Tim Bretz
+ *         Main Activity.
+ *         Makes call to execute GET request
+ *         Displays Owners in a Recycler View
+ *         Provides fab to go to Add Owner Activity
+ */
 
 public class OwnersActivity extends AppCompatActivity {
 
@@ -47,14 +54,6 @@ public class OwnersActivity extends AppCompatActivity {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
         recyclerView.setAdapter(adapter);
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                addOwner();
-            }
-        });
     }
 
     @Override
@@ -75,10 +74,16 @@ public class OwnersActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void addOwner() {
+    public void fabOnClick(View view) {
         Intent intent = new Intent(this, AddOwnerActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * @author Tim Bretz
+     *         <p>
+     *         Overrides Adapter methods to produce the Recycler View
+     */
 
     private class OwnersAdapter extends RecyclerView.Adapter<OwnersAdapter.OwnerViewHolder> {
 
@@ -99,6 +104,12 @@ public class OwnersActivity extends AppCompatActivity {
         public int getItemCount() {
             return owners.size();
         }
+
+        /**
+         * @author Tim
+         *         <p>
+         *         View Holder for the custom Adapter
+         */
 
         public class OwnerViewHolder extends RecyclerView.ViewHolder {
             TextView nameTV;

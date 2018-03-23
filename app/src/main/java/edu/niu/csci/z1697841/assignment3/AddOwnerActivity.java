@@ -10,6 +10,13 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Toast;
 
+/**
+ * @author Tim Bretz
+ *         <p>
+ *         Displays fields required to make POST request to add an owner.
+ *         Retrieves data and makes call to execute POST request
+ */
+
 public class AddOwnerActivity extends AppCompatActivity {
     EditText fnameET;
     EditText lnameET;
@@ -57,25 +64,35 @@ public class AddOwnerActivity extends AppCompatActivity {
         String lname = lnameET.getText().toString();
         String regex = "^[a-zA-Z]*$";
 
+        // Check if both fields are filled out
         if (fname.isEmpty()) {
             Toast.makeText(this, "First Name cannot be blank", Toast.LENGTH_SHORT).show();
         } else if (lname.isEmpty()) {
             Toast.makeText(this, "Last Name cannot be blank", Toast.LENGTH_SHORT).show();
-        } else if (!fname.matches(regex)) {
+        }
+        // Check if both fields are letters only
+        else if (!fname.matches(regex)) {
             Toast.makeText(this, "First Name must be letters only", Toast.LENGTH_SHORT).show();
         } else if (!lname.matches(regex)) {
             Toast.makeText(this, "Last Name must be letters only", Toast.LENGTH_SHORT).show();
         } else {
             post = new RESTfulPOST(fname, lname);
+
+/*
+            The following line is commented out to prevent unnecessary hits to the professors endpoint.
+            Please uncomment only if it is crucial to testing.
+*/
+
 //            post.execute();
+
             Toast.makeText(this, fname + " " + lname + " has been registered", Toast.LENGTH_SHORT).show();
         }
 
+        // Remove focus from both text fields and lower the keyboard
         fnameET.setText("");
         fnameET.clearFocus();
         lnameET.setText("");
         lnameET.clearFocus();
-        Toast.makeText(this, fname + " " + lname + " has been registered", Toast.LENGTH_LONG).show();
         hideSoftKeyboard(view);
     }
 

@@ -3,6 +3,12 @@ package edu.niu.csci.z1697841.assignment3;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+/**
+ * @author Tim Bretz
+ *         <p>
+ *         Displays app info
+ */
+
 public class InfoActivity extends AppCompatActivity {
 
     @Override

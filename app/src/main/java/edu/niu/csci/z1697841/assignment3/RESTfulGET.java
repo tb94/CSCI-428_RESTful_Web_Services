@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 /**
  * Created by Tim on 3/20/2018.
- *
+ * <p>
  * Takes no parameters
  * Makes a GET request to retrieve JSON data from the webservice
  * Parses the JSON to create Owner object
@@ -41,7 +41,7 @@ public class RESTfulGET extends AsyncTask<Object, Object, ArrayList<Owner>> {
         BufferedReader reader;
         JSONArray jsonResult;
         String line;
-        StringBuilder data = new StringBuilder(new String());
+        StringBuilder data = new StringBuilder();
         try {
             url = new URL("http://www.jorjabrown.us/petstore/api/owners/list");
             connection = (HttpURLConnection) url.openConnection();
